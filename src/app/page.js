@@ -1,9 +1,8 @@
-import Image from "next/image";
 import HeroSection from "./components/HeroSection";
 
 export default function Home() {
   return (
-    <main className="max-w-[1440px] mx-auto">
+    <main className="container px-4 mx-auto">
       <section id="hero">
         <HeroSection />
       </section>
