@@ -4,14 +4,14 @@ const HeroSection = () => {
   return (
     <section className="relative px-4 mx-auto w-full bg-white">
       {/* Background pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#333_1px,transparent_1px)] bg-[length:20px_20px] opacity-[0.08] pointer-events-none z-[1]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(#333_2px,transparent_2px)] bg-[length:20px_20px] opacity-[0.07] pointer-events-none "></div>
 
       <div className="w-full max-w-[900px] mx-auto h-min pt-6 md:pt-12">
         {/* Top Bar with Logos */}
         <div className="flex relative z-10 flex-col gap-10 justify-between items-center pt-6 sm:gap-4 md:flex-row">
           <div>
             {/* Executive Study Abroad logo */}
-            <Image src="/images/executive_logo.png" alt="Executive Study Abroad Logo" width={400} height={126} className="w-full max-w-[200px] sm:max-w-[300px] md:max-w-[400px] h-auto" />
+            <Image src="/images/executive_logo.png" alt="Executive Study Abroad Logo" width={400} height={126} className="w-full max-w-[200px] sm:max-w-[300px] md:max-w-[400px] h-auto z-[999]" />
           </div>
 
           <div>
