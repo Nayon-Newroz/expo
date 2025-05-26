@@ -2,12 +2,12 @@ import React from "react";
 
 const Participates = () => {
   return (
-    <div className="py-32">
+    <div className="py-32 w-full max-w-[900px] mx-auto">
       <h1 className="text-center text-3xl md:text-4xl font-bold mb-5">
         Participating Australian Universities
       </h1>
 
-      <div className="flex flex-wrap justify-center gap-8 p-4">
+      <div className="flex flex-wrap justify-center gap-8 py-4">
         {[
           "UOA",
           "MQ",
@@ -45,7 +45,7 @@ const Participates = () => {
         ].map((logo) => (
           <div
             key={logo}
-            className="h-12 w-32 md:w-40 flex items-center justify-center  rounded"
+            className="h-12 w-28 md:w-36 flex items-center justify-around  rounded"
           >
             <img
               src={`/university-logos/${logo}.png`}

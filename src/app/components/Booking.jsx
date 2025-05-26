@@ -65,8 +65,8 @@ const Booking = () => {
     }
   };
   return (
-    <div className="py-12 ">
-      <h1 className="text-3xl md:text-4xl font-bold mb-5">
+    <div className="py-12 max-w-[900px] mx-auto">
+      <h1 className="text-center lg:text-left text-3xl md:text-4xl font-bold mb-5 px-4 md:px-0">
         Book Your Free Entry Now
       </h1>
 
@@ -77,7 +77,7 @@ const Booking = () => {
             "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
         }}
       >
-        <div className="w-full lg:w-1/2 p-8 lg:p-16">
+        <div className="w-full lg:w-1/2 p-8 lg:p-8">
           <div className="h-full lg:flex items-center justify-center">
             <form
               onSubmit={handleSubmit}

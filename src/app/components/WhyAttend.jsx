@@ -3,14 +3,14 @@ import ImageSlider from "./ImgesSilder";
 
 const WhyAttend = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row h-auto">
-      <div className="w-full md:w-full lg:w-1/2 flex justify-center items-center px-3 lg:px-0 py-10 lg:py-0">
+    <div className="flex flex-col-reverse md:flex-row h-auto max-w-[900px] mx-auto">
+      <div className="w-full  md:w-3/5 flex justify-center items-center px-3 md:px-0 py-10 md:py-0">
         <div className="w-[80%] md:w-[80%]">
-          <h1 className="text-4xl md:text-6xl font-bold mb-5 text-white">
+          <h1 className="text-3xl md:text-4xl font-bold mb-5 text-white">
             Why <br />
             Attend
           </h1>
-          <ul className="text-white list-disc pl-8 text-[16px] space-y-1 md:space-y-3">
+          <ul className="text-white list-disc pl-8 text-[14px] space-y-1 md:space-y-1">
             <li>Free Entry for everyone</li>
             <li>1 to 1 Consultation - Speak directly with university staff.</li>
             <li>On Spot Assessment - Get assessed instantly and apply.</li>
@@ -22,7 +22,7 @@ const WhyAttend = () => {
           </ul>
         </div>
       </div>
-      <div className="w-full md:w-full lg:w-1/2">
+      <div className="w-full  md:w-2/5">
         <ImageSlider />
       </div>
     </div>
