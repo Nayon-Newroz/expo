@@ -11,22 +11,18 @@ const HeroSection = () => {
         <div className="flex relative z-10 flex-col gap-10 justify-between items-center pt-6 sm:gap-4 md:flex-row">
           <div>
             {/* Executive Study Abroad logo */}
-            <div className="flex flex-col">
-              <Image src="/images/executive_logo.png" alt="Executive Study Abroad Logo" width={400} height={126} className="w-full max-w-[200px] sm:max-w-[300px] md:max-w-[400px] h-auto" />
-            </div>
+            <Image src="/images/executive_logo.png" alt="Executive Study Abroad Logo" width={400} height={126} className="w-full max-w-[200px] sm:max-w-[300px] md:max-w-[400px] h-auto" />
           </div>
 
           <div>
             {/* EXPO logo and text */}
-            <div className="flex items-center">
-              <Image
-                src="/images/expo_logo.png"
-                alt="EXPO Logo"
-                width={443}
-                height={208}
-                className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[443px] h-auto object-contain"
-              />
-            </div>
+            <Image
+              src="/images/expo_logo.png"
+              alt="EXPO Logo"
+              width={443}
+              height={208}
+              className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[443px] h-auto object-contain"
+            />
           </div>
         </div>
 
