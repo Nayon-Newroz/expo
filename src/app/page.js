@@ -3,7 +3,7 @@ import HeroSection from "./components/HeroSection";
 
 export default function Home() {
   return (
-    <main className="mx-auto">
+    <main className="pb-20 mx-auto">
       <section id="hero">
         <HeroSection />
         <BenefitsSection />
