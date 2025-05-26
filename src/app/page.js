@@ -6,7 +6,7 @@ import WhyAttend from "./components/WhyAttend";
 
 export default function Home() {
   return (
-    <main className="container px-4 mx-auto">
+    <main className="pb-20 mx-auto">
       <section id="hero">
         <HeroSection />
         <BenefitsSection/>
