@@ -52,25 +52,90 @@ const Booking = () => {
     return emailRegex.test(String(email).toLowerCase());
   };
 
+  // New function to validate individual fields
+  const validateField = (name, value) => {
+    let error = "";
+    
+    switch (name) {
+      case "firstName":
+        if (!value.trim()) error = "First name is required";
+        break;
+      case "lastName":
+        if (!value.trim()) error = "Last name is required";
+        break;
+      case "email":
+        if (!value.trim()) {
+          error = "Email is required";
+        } else if (!isValidEmail(value)) {
+          error = "Please enter a valid email address";
+        }
+        break;
+      case "mobile":
+        if (!value.trim()) {
+          error = "Mobile number is required";
+        } else if (!isValidBDPhone(value)) {
+          error = "Please enter a valid Bangladesh mobile number";
+        }
+        break;
+      case "qualification":
+        if (!value.trim()) error = "Academic qualification is required";
+        break;
+      case "institution":
+        if (!value.trim()) error = "Institution is required";
+        break;
+      default:
+        break;
+    }
+    
+    return error;
+  };
+
+  // Updated handle change functions
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    
+    // Update the state based on input name
+    switch (name) {
+      case "firstName": setFirstName(value); break;
+      case "lastName": setLastName(value); break;
+      case "email": setEmail(value); break;
+      case "mobile": setMobile(value); break;
+      case "qualification": setQualification(value); break;
+      case "institution": setInstitution(value); break;
+      default: break;
+    }
+    
+    // Validate the field
+    const errorMessage = validateField(name, value);
+    
+    // Update errors state
+    setErrors(prev => ({
+      ...prev,
+      [name]: errorMessage
+    }));
+  };
+
   // Validate form fields based on API requirements
   const validateForm = () => {
     const newErrors = {};
 
-    // Required fields according to API documentation
+    // All fields are now required
     if (!firstName.trim()) newErrors.firstName = "First name is required";
     if (!lastName.trim()) newErrors.lastName = "Last name is required";
-
-    // Email validation - not required but validate format if provided
-    if (email.trim() && !isValidEmail(email)) {
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!isValidEmail(email)) {
       newErrors.email = "Please enter a valid email address";
     }
-
-    // Mobile validation - not required but validate format if provided
-    if (mobile.trim() && !isValidBDPhone(mobile)) {
-      newErrors.mobile = "Please enter a valid Bangladesh mobile number (e.g., 01XXXXXXXXX)";
+    
+    if (!mobile.trim()) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!isValidBDPhone(mobile)) {
+      newErrors.mobile = "Please enter a valid Bangladesh mobile number";
     }
-
-    // Qualification and Institution are not required according to API docs
+    
+    if (!qualification.trim()) newErrors.qualification = "Academic qualification is required";
+    if (!institution.trim()) newErrors.institution = "Institution is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -192,7 +257,7 @@ const Booking = () => {
               {responseMessage.status === "success" ? (
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 md:h-12 md:w-12 lg" 
+                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14" 
                   viewBox="0 0 20 20" 
                   fill="currentColor"
                 >
@@ -295,7 +360,7 @@ const Booking = () => {
                     type="text"
                     name="firstName"
                     value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={handleInputChange}
                     className={`mt-1 w-full border ${errors.firstName ? "border-red-500" : "border-gray-300"
                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                   />
@@ -315,7 +380,7 @@ const Booking = () => {
                     type="text"
                     name="lastName"
                     value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={handleInputChange}
                     className={`mt-1 w-full border ${errors.lastName ? "border-red-500" : "border-gray-300"
                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                   />
@@ -336,7 +401,7 @@ const Booking = () => {
                   type="email"
                   name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.email ? "border-red-500" : "border-gray-300"
                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
@@ -356,7 +421,7 @@ const Booking = () => {
                   type="number"
                   name="mobile"
                   value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
+                  onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.mobile ? "border-red-500" : "border-gray-300"
                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
@@ -376,7 +441,7 @@ const Booking = () => {
                   type="text"
                   name="qualification"
                   value={qualification}
-                  onChange={(e) => setQualification(e.target.value)}
+                  onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.qualification ? "border-red-500" : "border-gray-300"
                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
@@ -396,7 +461,7 @@ const Booking = () => {
                   type="text"
                   name="institution"
                   value={institution}
-                  onChange={(e) => setInstitution(e.target.value)}
+                  onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.institution ? "border-red-500" : "border-gray-300"
                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
