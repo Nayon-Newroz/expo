@@ -1,4 +1,3 @@
-import React from "react";
 
 const Participates = () => {
   return (
@@ -9,7 +8,7 @@ const Participates = () => {
 
       <div className="flex flex-wrap justify-center gap-8 py-4">
         {[
-          "UOA",
+          "AU",
           "MQ",
           "MONASH",
           "CDU",
