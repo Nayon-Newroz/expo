@@ -10,7 +10,7 @@ const BenefitsSection = () => {
     {
       icon: '/images/scholarship_icon.png',
       title: 'Scholarships',
-      description: 'Get upto 100%\nscholarship*'
+      description: 'Get upto 100%\nscholarship'
     },
     {
       icon: '/images/spot_app_icon.png',
