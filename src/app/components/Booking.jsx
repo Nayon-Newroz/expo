@@ -346,8 +346,8 @@ const Booking = () => {
             onClick={() => setShowModal(false)}
             style={{
               background: responseMessage.status === "success"
-                ? "linear-gradient(to right, #EC4899, #3B82F6)"
-                : "linear-gradient(to right, #EC4899, #3B82F6)",
+                ? "linear-gradient(to right, #f465a8, #11a5f9)"
+                : "linear-gradient(to right, #f465a8, #11a5f9)",
             }}
             className="w-full py-2.5 px-4 rounded-full text-white font-medium transition-transform text-center cursor-pointer"
           >
@@ -504,7 +504,7 @@ const Booking = () => {
                   type="submit"
                   disabled={isLoading}
                   style={{
-                    background: "linear-gradient(to right, #EC4899, #3B82F6)",
+                    background: "linear-gradient(to right, #f465a8, #11a5f9)",
                   }}
                   className={`w-full text-white py-2 px-4 rounded-full flex justify-center items-center transition-transform ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                 >

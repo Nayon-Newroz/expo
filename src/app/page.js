@@ -17,7 +17,7 @@ export default function Home() {
       </section>
       <section
         id="why-attend"
-        style={{ background: "linear-gradient(to right, #EC4899, #3B82F6)" }}
+        style={{ background: "linear-gradient(to right, #f465a8, #11a5f9)" }}
       >
         <WhyAttend />
       </section>
