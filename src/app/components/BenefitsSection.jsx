@@ -20,7 +20,7 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="relative w-full bg-gradient-to-r from-[#EC4899] to-[#3B82F6] -mt-[50px] md:-mt-[90px]" >
+    <section className="relative w-full bg-gradient-to-r from-[#EC4899] to-[#3B82F6] -mt-[20px] sm:-mt-[25px] md:-mt-[90px] lg:-mt-[90px]" >
       <div className="container mx-auto relative z-10 px-4 pt-[40px] md:pt-[80px]">
         {/* Heading */}
         <h2 className="text-white text-2xl md:text-[36px] font-semibold leading-[1.21em] text-center relative top-[30px] md:top-[20px]">
