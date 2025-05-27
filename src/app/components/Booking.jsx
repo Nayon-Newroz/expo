@@ -225,7 +225,6 @@ const Booking = () => {
       );
 
       const responseData = await response.json();
-      console.log("🚀 ~ handleSubmit ~ responseData:", responseData)
 
       if (response.ok) {
         setResponseMessage({
