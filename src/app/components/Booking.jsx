@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Booking = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,6 +15,34 @@ const Booking = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [responseMessage, setResponseMessage] = useState({ status: "", message: "" });
+
+  const [customFields, setCustomFields] = useState([]);
+
+  // Fetch custom fields from API
+  useEffect(() => {
+    const fetchCustomFields = async () => {
+      try {
+        const response = await fetch(
+          "https://etibd.agentcisapp.com/api/v2/online-form/eduexposite/docs",
+          {
+            headers: {
+              Authorization:
+                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNjYyOGY4MmVlOWFkN2FiZThlNTJhMzUyYjFmYTdkOWM3NDQxMGQ2NGZiYjViNTI2MTQ3MmJkZjQwMmM3ZjI5MmQ2MmEyNjEzZWE5NDNkYzMiLCJpYXQiOjE3NDgxNzEwNjYuMzk5MDk4LCJuYmYiOjE3NDgxNzEwNjYuMzk5MTA0LCJleHAiOjE3Nzk3MDcwNjYuMzc0MDcxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.gDyqQ9Tg40Tdjq9Fi8YLywEg8indUED_BX-4d_ZtxscXCabjbnrL9As6EtBTL5S3SFAQl__b8_ptNrUBgBOOhTrQwcFfsU8Dw6ueUl7TncLTLyBXjyfZpSaDgFlKqPbOCge0aM7PVFg26rSossfHL9WVT8YVMWbA69oJVblOW7evjTU19s_-ZXOCKCcsyX8Nnkxv8dVNZ5b3Ok3OTzwThPjaoBYHzOP1tKuR_L6nTkvU00GJJCBFDkogYP4RyWKyOs6r9GFMwmzOOK0Jc3-yPzYRUUy4c4HWyT7r32AbSa752DTRvEHlGvyJKFEsWaq29uoi5gBPcAlB6DQuPjv66-rWz12l4NW8cIIRUM7TGxU7UUAlD0EmwVSGSGMtXp-GKT7PT4vzs5xEcSf4hF2tDyVvyPfJFJCTIoCznbtjq_RfHzbQ9Dng4jlj5RE7gwk9wvsC-Ew9e52q_MiaAkePiGNdaIgqZSHJ6eTdR3tDZqQU6xQUt-IsuFsvsKHN2TQ8_w0KJ8J-PfNBy5ah5zy9Q25lRC--yvxPS6p5lSn_GAav48TTqNQvY07Dmr6DlwZqjlRuZ23MyiZdzJYmiF9tLTYiQl3omIVApmLocd1nN3mXfbFPtll_B0XlqyJp9KdQLVLWK8zMrdm5l-oRTK6oCkre08LKpyQBezBhOtTGaHQ",
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setCustomFields(data);
+        }
+      } catch (error) {
+        console.error("Error fetching custom fields:", error);
+      }
+    };
+
+    fetchCustomFields();
+  }, []);
 
   // Clear form fields
   const clearForm = () => {
@@ -55,7 +83,7 @@ const Booking = () => {
   // New function to validate individual fields
   const validateField = (name, value) => {
     let error = "";
-    
+
     switch (name) {
       case "firstName":
         if (!value.trim()) error = "First name is required";
@@ -86,14 +114,14 @@ const Booking = () => {
       default:
         break;
     }
-    
+
     return error;
   };
 
   // Updated handle change functions
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
+
     // Update the state based on input name
     switch (name) {
       case "firstName": setFirstName(value); break;
@@ -104,10 +132,10 @@ const Booking = () => {
       case "institution": setInstitution(value); break;
       default: break;
     }
-    
+
     // Validate the field
     const errorMessage = validateField(name, value);
-    
+
     // Update errors state
     setErrors(prev => ({
       ...prev,
@@ -127,13 +155,13 @@ const Booking = () => {
     } else if (!isValidEmail(email)) {
       newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!mobile.trim()) {
       newErrors.mobile = "Mobile number is required";
     } else if (!isValidBDPhone(mobile)) {
       newErrors.mobile = "Please enter a valid Bangladesh mobile number";
     }
-    
+
     if (!qualification.trim()) newErrors.qualification = "Academic qualification is required";
     if (!institution.trim()) newErrors.institution = "Institution is required";
 
@@ -166,16 +194,16 @@ const Booking = () => {
         number: mobile,
         country_code: "BD",
       } : undefined,
-      
+
       email: email || undefined,
 
       // Custom fields with their respective slugs
-      "635dfe48-8258-4484-8e44-7b42e8503c24": qualification || undefined, // Last Academic Qualification
-      "63ab6450-0c4f-4f7a-80bf-2b07621c28b4": institution || undefined, // Passing Institution
+      [customFields.find(field => field.name === "Last Academic Qualification")?.slug]: qualification || undefined, // Last Academic Qualification
+      [customFields.find(field => field.name === "Passing Institution")?.slug]: institution || undefined, // Passing Institution
     };
 
     // Remove undefined values
-    Object.keys(formData).forEach(key => 
+    Object.keys(formData).forEach(key =>
       formData[key] === undefined && delete formData[key]
     );
 
@@ -208,7 +236,7 @@ const Booking = () => {
         // Handle validation errors from backend
         if (responseData.errors) {
           const backendErrors = {};
-          
+
           // Process backend validation errors
           Object.keys(responseData.errors).forEach(key => {
             if (key === 'email') {
@@ -220,12 +248,12 @@ const Booking = () => {
               backendErrors[key] = responseData.errors[key][0];
             }
           });
-          
+
           setErrors(prev => ({ ...prev, ...backendErrors }));
         }
-        
+
         setResponseMessage({
-          status: "error", 
+          status: "error",
           message: responseData.message || "Failed to submit form. Please try again later.",
           data: responseData
         });
@@ -251,33 +279,33 @@ const Booking = () => {
           <div className="flex flex-col items-center text-center">
             {/* Status Icon */}
             <div className={`mb-6 rounded-full p-3 md:p-5 ${responseMessage.status === "success"
-                ? "bg-green-100 text-green-600"
-                : "bg-red-100 text-red-600"
-            }`}>
+              ? "bg-green-100 text-green-600"
+              : "bg-red-100 text-red-600"
+              }`}>
               {responseMessage.status === "success" ? (
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14" 
-                  viewBox="0 0 20 20" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
+                  viewBox="0 0 20 20"
                   fill="currentColor"
                 >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" 
-                    clipRule="evenodd" 
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
                   />
                 </svg>
               ) : (
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14" 
-                  viewBox="0 0 20 20" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
+                  viewBox="0 0 20 20"
                   fill="currentColor"
                 >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" 
-                    clipRule="evenodd" 
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
                   />
                 </svg>
               )}
@@ -287,7 +315,7 @@ const Booking = () => {
             <h3 className="text-2xl md:text-3xl font-semibold mb-4">
               {responseMessage.status === "success" ? "Success!" : "Error"}
             </h3>
-            
+
             {/* Message */}
             <div className="mb-6">
               <p className={`text-gray-700 mb-4`}>
@@ -316,7 +344,7 @@ const Booking = () => {
           <button
             onClick={() => setShowModal(false)}
             style={{
-              background: responseMessage.status === "success" 
+              background: responseMessage.status === "success"
                 ? "linear-gradient(to right, #EC4899, #3B82F6)"
                 : "linear-gradient(to right, #EC4899, #3B82F6)",
             }}
@@ -362,7 +390,7 @@ const Booking = () => {
                     value={firstName}
                     onChange={handleInputChange}
                     className={`mt-1 w-full border ${errors.firstName ? "border-red-500" : "border-gray-300"
-                     } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                   />
                   {errors.firstName && (
                     <p className="text-red-500 text-xs mt-1 ml-2">{errors.firstName}</p>
@@ -382,7 +410,7 @@ const Booking = () => {
                     value={lastName}
                     onChange={handleInputChange}
                     className={`mt-1 w-full border ${errors.lastName ? "border-red-500" : "border-gray-300"
-                     } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                   />
                   {errors.lastName && (
                     <p className="text-red-500 text-xs mt-1 ml-2">{errors.lastName}</p>
@@ -403,7 +431,7 @@ const Booking = () => {
                   value={email}
                   onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.email ? "border-red-500" : "border-gray-300"
-                   } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.email}</p>
@@ -423,7 +451,7 @@ const Booking = () => {
                   value={mobile}
                   onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.mobile ? "border-red-500" : "border-gray-300"
-                   } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
                 {errors.mobile && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.mobile}</p>
@@ -443,7 +471,7 @@ const Booking = () => {
                   value={qualification}
                   onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.qualification ? "border-red-500" : "border-gray-300"
-                   } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
                 {errors.qualification && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.qualification}</p>
@@ -463,7 +491,7 @@ const Booking = () => {
                   value={institution}
                   onChange={handleInputChange}
                   className={`mt-1 w-full border ${errors.institution ? "border-red-500" : "border-gray-300"
-                   } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
                 />
                 {errors.institution && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.institution}</p>
