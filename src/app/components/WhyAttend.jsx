@@ -4,7 +4,7 @@ const WhyAttend = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row h-auto max-w-[900px] mx-auto">
       <div className="w-full  md:w-3/5 flex justify-center items-center px-3 md:px-0 py-10 md:py-0">
-        <div className="w-[80%] md:w-[80%]">
+        <div className="px-4 lg:px-0">
           <h1 className="text-4xl md:text-5xl font-bold mb-5 text-white">
             Why <br />
             Attend
