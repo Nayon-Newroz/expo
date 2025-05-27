@@ -6,7 +6,7 @@ const Participates = () => {
         Participating Australian Universities
       </h1>
 
-      <div className="flex flex-wrap justify-center gap-8 py-4">
+      <div className="flex flex-wrap justify-center gap-8 md:gap-10 py-4">
         {[
           "AU",
           "MQ",
