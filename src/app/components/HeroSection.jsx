@@ -38,9 +38,12 @@ const HeroSection = () => {
           />
           {/* Date Banner - positioned based on Figma location */}
           <div className="absolute w-full -bottom-[18px]  z-10">
-            <div className="w-full  flex justify-center items-center bg-white rounded-[20px] py-6 shadow-lg">
-              <h2 className="font-['Inter',sans-serif] text-[20px] sm:text-[24px] md:text-[32px] font-bold leading-[1.21em] text-center text-black whitespace-nowrap">
+            <div className="w-full  flex justify-center items-center bg-white rounded-[20px] py-4 sm:py-6 shadow-lg">
+              <h2 className="hidden sm:block break-all text-[18px] sm:text-[24px] md:text-[32px] font-bold leading-[1.21em] text-center text-black">
                 Friday, 27<sup>th</sup> June 2025 (10am-5.30pm)
+              </h2>
+              <h2 className="sm:hidden break-all text-[18px] sm:text-[24px] md:text-[32px] font-bold leading-[1.21em] text-center text-black">
+                Friday, 27<sup>th</sup> June 2025 <br /> (10am-5.30pm)
               </h2>
             </div>
           </div>
