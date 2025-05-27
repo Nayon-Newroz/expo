@@ -371,6 +371,14 @@ const Booking = () => {
             "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
         }}
       >
+        {/* Mobile-only image at top */}
+        <div className="relative w-full block lg:hidden ">
+          <img src="/Booking_mobile_bg.png" className="w-full max-h-[170px] sm:max-h-[250px] object-cover object-center" alt="booking image" />
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+            <img src="/Booking_mobile_logo.png" className="w-full max-h-[80px] max-w-[332px]" alt="booking image" />
+          </div>
+        </div>
+        
         <div className="w-full lg:w-1/2 p-8 lg:p-8">
           <div className="h-full lg:flex items-center justify-center">
             <form
@@ -517,15 +525,17 @@ const Booking = () => {
                       Processing...
                     </>
                   ) : (
-                    "Submit"
+                    "Register Now"
                   )}
                 </button>
               </div>
             </form>
           </div >
         </div >
+        
+        {/* Desktop-only image on right side */}
         <div className="w-full lg:w-1/2 hidden lg:block">
-          <img src="/Booking.png" className="w-full" alt="booking image" />
+          <img src="/Booking.png" className="w-full h-full object-cover" alt="booking image" />
         </div>
       </div >
       <ResponseModal />
