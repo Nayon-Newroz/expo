@@ -215,7 +215,8 @@ const Booking = () => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "accept": "application/json",
+            "content-type": "application/json",
             Authorization:
               "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiNjYyOGY4MmVlOWFkN2FiZThlNTJhMzUyYjFmYTdkOWM3NDQxMGQ2NGZiYjViNTI2MTQ3MmJkZjQwMmM3ZjI5MmQ2MmEyNjEzZWE5NDNkYzMiLCJpYXQiOjE3NDgxNzEwNjYuMzk5MDk4LCJuYmYiOjE3NDgxNzEwNjYuMzk5MTA0LCJleHAiOjE3Nzk3MDcwNjYuMzc0MDcxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.gDyqQ9Tg40Tdjq9Fi8YLywEg8indUED_BX-4d_ZtxscXCabjbnrL9As6EtBTL5S3SFAQl__b8_ptNrUBgBOOhTrQwcFfsU8Dw6ueUl7TncLTLyBXjyfZpSaDgFlKqPbOCge0aM7PVFg26rSossfHL9WVT8YVMWbA69oJVblOW7evjTU19s_-ZXOCKCcsyX8Nnkxv8dVNZ5b3Ok3OTzwThPjaoBYHzOP1tKuR_L6nTkvU00GJJCBFDkogYP4RyWKyOs6r9GFMwmzOOK0Jc3-yPzYRUUy4c4HWyT7r32AbSa752DTRvEHlGvyJKFEsWaq29uoi5gBPcAlB6DQuPjv66-rWz12l4NW8cIIRUM7TGxU7UUAlD0EmwVSGSGMtXp-GKT7PT4vzs5xEcSf4hF2tDyVvyPfJFJCTIoCznbtjq_RfHzbQ9Dng4jlj5RE7gwk9wvsC-Ew9e52q_MiaAkePiGNdaIgqZSHJ6eTdR3tDZqQU6xQUt-IsuFsvsKHN2TQ8_w0KJ8J-PfNBy5ah5zy9Q25lRC--yvxPS6p5lSn_GAav48TTqNQvY07Dmr6DlwZqjlRuZ23MyiZdzJYmiF9tLTYiQl3omIVApmLocd1nN3mXfbFPtll_B0XlqyJp9KdQLVLWK8zMrdm5l-oRTK6oCkre08LKpyQBezBhOtTGaHQ",
           },
@@ -224,6 +225,7 @@ const Booking = () => {
       );
 
       const responseData = await response.json();
+      console.log("🚀 ~ handleSubmit ~ responseData:", responseData)
 
       if (response.ok) {
         setResponseMessage({
