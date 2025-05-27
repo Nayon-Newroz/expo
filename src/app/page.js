@@ -1,12 +1,13 @@
 import BenefitsSection from "./components/BenefitsSection";
 import Booking from "./components/Booking";
+import Footer from "./components/Footer";
 import HeroSection from "./components/HeroSection";
 import Participates from "./components/Participates";
 import WhyAttend from "./components/WhyAttend";
 
 export default function Home() {
   return (
-    <main className="pb-20 mx-auto">
+    <main className="mx-auto">
       <section id="hero">
         <HeroSection />
         <BenefitsSection/>
@@ -23,6 +24,7 @@ export default function Home() {
       <section id="booking">
         <Booking />
       </section>
+      <Footer />
     </main>
   );
 }
