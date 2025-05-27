@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 // import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 const ImageSlider = ({ images }) => {
@@ -55,7 +54,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <Slider {...settings}>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]?.map((item, i) => (
+      {[1, 2, 3, 4, 5]?.map((item, i) => (
         <img
           src={`/past-expo-photos/${i + 1}.jpg`}
           alt={`past expo photos`}
