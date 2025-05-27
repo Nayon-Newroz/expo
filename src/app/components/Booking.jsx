@@ -247,10 +247,10 @@ const Booking = () => {
 
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-lg">
+        <div className="bg-white rounded-2xl p-8 md:p-10 max-w-md w-full shadow-lg">
           <div className="flex flex-col items-center text-center">
             {/* Status Icon */}
-            <div className={`mb-4 rounded-full p-3 md:p-5 ${responseMessage.status === "success"
+            <div className={`mb-6 rounded-full p-3 md:p-5 ${responseMessage.status === "success"
                 ? "bg-green-100 text-green-600"
                 : "bg-red-100 text-red-600"
             }`}>
@@ -284,9 +284,9 @@ const Booking = () => {
             </div>
 
             {/* Status Text */}
-            {/* <h3 className="text-xl font-semibold mb-4">
+            <h3 className="text-2xl md:text-3xl font-semibold mb-4">
               {responseMessage.status === "success" ? "Success!" : "Error"}
-            </h3> */}
+            </h3>
             
             {/* Message */}
             <div className="mb-6">
@@ -317,7 +317,7 @@ const Booking = () => {
             onClick={() => setShowModal(false)}
             style={{
               background: responseMessage.status === "success" 
-                ? "linear-gradient(to right, #10B981, #059669)"
+                ? "linear-gradient(to right, #EC4899, #3B82F6)"
                 : "linear-gradient(to right, #EC4899, #3B82F6)",
             }}
             className="w-full py-2.5 px-4 rounded-full text-white font-medium transition-transform text-center cursor-pointer"
