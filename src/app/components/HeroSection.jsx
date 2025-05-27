@@ -27,18 +27,18 @@ const HeroSection = () => {
         </div>
 
         {/* Sydney Opera House - now responsive */}
-        <div className="mt-6 md:mt-0 relative md:bottom-[64px]">
+        <div className="mt-12 sm:mt-6 md:mt-0 relative bottom-[34px] md:bottom-[64px]">
           <Image
             src="/images/soh.webp"
             alt="Sydney Opera House"
             width={752}
             height={298}
-            className="object-cover mx-auto min-h-[140px] md:min-h-[298px] object-top"
+            className="object-cover mx-auto sm:min-h-[140px] md:min-h-[298px] object-top"
             priority
           />
           {/* Date Banner - positioned based on Figma location */}
-          <div className="absolute w-full -bottom-[18px]  z-10">
-            <div className="w-full  flex justify-center items-center bg-white rounded-[20px] py-4 sm:py-6 shadow-lg">
+          <div className="absolute w-full -bottom-[54px] md:-bottom-[18px] z-10 ">
+            <div className="w-full  flex justify-center items-center bg-white rounded-[20px] py-4 sm:py-6 shadow-[0_0_10px_rgba(0,0,0,0.1)]">
               <h2 className="hidden sm:block break-all text-[18px] sm:text-[24px] md:text-[32px] font-bold leading-[1.21em] text-center text-black">
                 Friday, 27<sup>th</sup> June 2025 (10am-5.30pm)
               </h2>
