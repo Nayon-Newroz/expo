@@ -278,14 +278,14 @@ const Booking = () => {
         <div className="bg-white rounded-2xl p-8 md:p-10 max-w-md w-full shadow-lg">
           <div className="flex flex-col items-center text-center">
             {/* Status Icon */}
-            <div className={`mb-6 rounded-full p-3 md:p-5 ${responseMessage.status === "success"
+            <div className={`mb-6 rounded-full p-5 ${responseMessage.status === "success"
               ? "bg-green-100 text-green-600"
               : "bg-red-100 text-red-600"
               }`}>
               {responseMessage.status === "success" ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
+                  className="size-14"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -298,7 +298,7 @@ const Booking = () => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-10 w-10 md:h-12 md:w-12 lg:h-14 lg:w-14"
+                  className="size-14"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
