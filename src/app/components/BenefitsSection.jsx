@@ -5,12 +5,12 @@ const BenefitsSection = () => {
     {
       icon: '/images/free_entry_icon.png',
       title: 'Free Entry',
-      description: 'No registration fee\nor entry fee'
+      description: 'No fee for registration\nor entry'
     },
     {
       icon: '/images/scholarship_icon.png',
       title: 'Scholarships',
-      description: 'Get 10%-100%\nscholarships'
+      description: 'Get upto 100%\nscholarship*'
     },
     {
       icon: '/images/spot_app_icon.png',
@@ -24,7 +24,7 @@ const BenefitsSection = () => {
       <div className="container mx-auto relative z-10 px-4 pt-[40px] md:pt-[80px]">
         {/* Heading */}
         <h2 className="text-white text-2xl md:text-[36px] font-semibold leading-[1.21em] text-center relative top-[30px] md:top-[20px]">
-          Benefits of Joining This Expo
+          Expo Highlights
         </h2>
 
         {/* Benefits Cards */}

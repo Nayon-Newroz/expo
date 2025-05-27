@@ -1,4 +1,3 @@
-import React from "react";
 import ImageSlider from "./ImgesSilder";
 
 const WhyAttend = () => {
@@ -11,13 +10,13 @@ const WhyAttend = () => {
             Attend
           </h1>
           <ul className="text-white list-disc pl-8 text-[14px] space-y-1 md:space-y-1">
-            <li>Free Entry for everyone</li>
-            <li>1 to 1 Consultation - Speak directly with university staff.</li>
-            <li>On Spot Assessment - Get assessed instantly and apply.</li>
-            <li>Application Fee Waiver* - Save on application fees. </li>
-            <li>Student Visa Desk - Get expert visa guidance.</li>
+            <li>Free Entry- No entry fee</li>
+            <li>1 to 1 Consultation- Speak directly with university representatives</li>
+            <li>On Spot Assessment- Get assessed instantly and apply</li>
+            <li>Application Fee Waiver*- Save on application fees</li>
+            <li>Student Visa Desk- Get expert visa guidance</li>
             <li>
-              Free Services- Admission, scholarships, GS/GTE & visa support.
+              Free Services- Admission, scholarships, GS/GTE & student visa application guidance
             </li>
           </ul>
         </div>
