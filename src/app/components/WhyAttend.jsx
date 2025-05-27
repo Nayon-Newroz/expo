@@ -9,7 +9,7 @@ const WhyAttend = () => {
             Why <br />
             Attend
           </h1>
-          <ul className="text-white list-disc pl-8 text-[14px] space-y-1 md:space-y-1">
+          <ul className="text-white list-disc pl-4 text-[14px] space-y-1 md:space-y-1">
             <li>Free Entry - No entry fee</li>
             <li>1 to 1 Consultation - Speak directly with university representatives</li>
             <li>On Spot Assessment - Get assessed instantly and apply</li>
