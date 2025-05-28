@@ -373,9 +373,9 @@ const Booking = () => {
       >
         {/* Mobile-only image at top */}
         <div className="relative w-full block lg:hidden ">
-          <img src="/Booking_mobile_bg.png" className="w-full max-h-[170px] sm:max-h-[250px] object-cover object-center" alt="booking image" />
+          <img src="/booking_mobile_bg.png" className="w-full max-h-[170px] sm:max-h-[250px] object-cover object-center" alt="booking image" />
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <img src="/Booking_mobile_logo.png" className="w-full max-h-[80px] max-w-[332px]" alt="booking image" />
+            <img src="/booking_mobile_logo.png" className="w-full max-h-[80px] max-w-[332px]" alt="booking image" />
           </div>
         </div>
         
