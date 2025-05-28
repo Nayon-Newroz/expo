@@ -229,7 +229,7 @@ const Booking = () => {
       if (response.ok) {
         setResponseMessage({
           status: "success",
-          message: "Your booking has been submitted successfully!",
+          message: "You’re officially registered for Australian Education EXPO 2025! Keep an eye on your email.",
           data: responseData
         });
         clearForm();
