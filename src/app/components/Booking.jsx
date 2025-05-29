@@ -455,7 +455,6 @@ const Booking = () => {
                   <input
                     type="text"
                     name="mobile"
-                    placeholder="1XXXXXXXXX"
                     value={mobile}
                     onChange={handleInputChange}
                     className="w-full py-3 px-3 text-[16px] leading-[1.625em] text-[#222222] focus:outline-none"
