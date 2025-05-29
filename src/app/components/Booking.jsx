@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Booking = () => {
@@ -59,18 +60,11 @@ const Booking = () => {
   const isValidBDPhone = (phone) => {
     // Remove any non-digit characters
     const digitsOnly = phone.replace(/\D/g, '');
-
-    // Check if it's a valid BD number (starts with 01, followed by 9 digits)
-    if (/^01\d{9}$/.test(digitsOnly)) {
-      return true;
-    }
-
-    // Check if it has country code +880 or 880
-    if (/^(?:\+?880|0)?1\d{9}$/.test(digitsOnly)) {
-      return true;
-    }
-
-    return false;
+    
+    // For our input field, user should enter only the number without country code
+    // Since we display +880 prefix separately
+    // Bangladesh mobile numbers start with 1 followed by 9 more digits
+    return /^1\d{9}$/.test(digitsOnly);
   };
 
   // Validate email format
@@ -102,7 +96,7 @@ const Booking = () => {
         if (!value.trim()) {
           error = "Mobile number is required";
         } else if (!isValidBDPhone(value)) {
-          error = "Please enter a valid Bangladesh mobile number";
+          error = "Please enter a 10-digit Bangladesh mobile number starting with 1";
         }
         break;
       case "qualification":
@@ -177,29 +171,24 @@ const Booking = () => {
 
     setIsLoading(true);
 
-    // API field structure based on documentation:
-    // [
-    //   { id: 1353, name: "first_name", slug: "first_name", is_required: true },
-    //   { id: 1354, name: "last_name", slug: "last_name", is_required: true },
-    //   { id: 1355, name: "phone", slug: "phone", is_required: false },
-    //   { id: 1356, name: "email", slug: "email", is_required: false },
-    //   { id: 1357, name: "Last Academic Qualification", slug: "635dfe48-8258-4484-8e44-7b42e8503c24", is_required: false },
-    //   { id: 1358, name: "Passing Institution", slug: "63ab6450-0c4f-4f7a-80bf-2b07621c28b4", is_required: false }
-    // ]
+    // Format the phone number properly for API submission
+    // The UI shows +880 prefix, but user only types the rest of the number
+    const formattedPhone = mobile ? mobile.replace(/\D/g, '') : '';
+
     const formData = {
       first_name: firstName,
       last_name: lastName,
 
-      phone: mobile ? {
-        number: mobile,
+      phone: formattedPhone ? {
+        number: `+880${formattedPhone}`, // Properly format with country code
         country_code: "BD",
       } : undefined,
 
       email: email || undefined,
 
       // Custom fields with their respective slugs
-      [customFields.find(field => field.name === "Last Academic Qualification")?.slug]: qualification || undefined, // Last Academic Qualification
-      [customFields.find(field => field.name === "Passing Institution")?.slug]: institution || undefined, // Passing Institution
+      [customFields.find(field => field.name === "Last Academic Qualification")?.slug]: qualification || undefined,
+      [customFields.find(field => field.name === "Passing Institution")?.slug]: institution || undefined,
     };
 
     // Remove undefined values
@@ -229,7 +218,7 @@ const Booking = () => {
       if (response.ok) {
         setResponseMessage({
           status: "success",
-          message: "You’re officially registered for Australian Education EXPO 2025! Keep an eye on your email.",
+          message: "You're officially registered for Australian Education EXPO 2025! Keep an eye on your email.",
           data: responseData
         });
         clearForm();
@@ -359,37 +348,48 @@ const Booking = () => {
   };
 
   return (
-    <div className="py-12 max-w-[900px] mx-auto">
-      <h1 className="text-center lg:text-left text-3xl md:text-4xl font-bold mb-5 px-4 md:px-0">
-        Book Your Free Entry Now
+    <div className="py-[64px] w-full max-w-[900px] mx-auto px-4 lg:px-0">
+      <h1 className="text-[36px] font-bold leading-[1.21em] mb-[24px] text-center md:text-left">
+        Book Your <br />Free Entry Now
       </h1>
 
-      <div
-        className="lg:flex w-full h-auto rounded-2xl bg-white overflow-hidden"
-        style={{
-          boxShadow:
-            "rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
-        }}
-      >
-        {/* Mobile-only image at top */}
-        <div className="relative w-full block lg:hidden ">
-          <img src="/booking_mobile_bg.png" className="w-full max-h-[170px] sm:max-h-[250px] object-cover object-center" alt="booking image" />
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <img src="/booking_mobile_logo.png" className="w-full max-h-[80px] max-w-[332px]" alt="booking image" />
+      <div className="w-full h-auto rounded-[20px] bg-white overflow-hidden shadow-[0px_4px_53px_rgba(0,0,0,0.1)] md:flex">
+        {/* Mobile banner */}
+        <div className="relative w-full h-[170px] block md:hidden overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/Westin_Hotel.png"
+              alt="Westin Hotel"
+              fill
+              className="object-cover"
+              style={{ objectPosition: "center center" }}
+              priority
+            />
+            <div className="absolute inset-0 opacity-30 bg-black bg-opacity-27"></div>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/Westin_Logo.png"
+              alt="Westin Logo"
+              width={332}
+              height={80}
+              priority
+            />
           </div>
         </div>
-        
-        <div className="w-full lg:w-1/2 p-8 lg:p-8">
-          <div className="h-full lg:flex items-center justify-center">
+
+        {/* Form section */}
+        <div className="w-full md:w-1/2 p-[30px] md:p-[39px]">
+          <div className="h-full flex flex-col justify-center items-center gap-[33px]">
             <form
               onSubmit={handleSubmit}
-              className="w-full"
+              className="w-full flex flex-col gap-[22px]"
             >
-              <div className=" lg:flex gap-4 mb-6">
-                <div className="mb-6 lg:mb-0 w-full">
+              {/* First and Last Name - Side by Side on larger screens, stacked on mobile */}
+              <div className="flex flex-col sm:flex-row gap-[22px]">
+                <div className="w-full flex flex-col gap-[7px]">
                   <label
-                    className="block text-sm font-medium "
-                    style={{ color: "#374151" }}
+                    className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                   >
                     First Name
                   </label>
@@ -398,18 +398,16 @@ const Booking = () => {
                     name="firstName"
                     value={firstName}
                     onChange={handleInputChange}
-                    className={`mt-1 w-full border ${errors.firstName ? "border-red-500" : "border-gray-300"
-                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    className={`w-full border ${errors.firstName ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] py-3 px-4 text-[#222222]`}
                   />
                   {errors.firstName && (
                     <p className="text-red-500 text-xs mt-1 ml-2">{errors.firstName}</p>
                   )}
                 </div>
 
-                <div className="mb-6 lg:mb-0 w-full">
+                <div className="w-full flex flex-col gap-[7px]">
                   <label
-                    className="block text-sm font-medium "
-                    style={{ color: "#374151" }}
+                    className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                   >
                     Last Name
                   </label>
@@ -418,8 +416,7 @@ const Booking = () => {
                     name="lastName"
                     value={lastName}
                     onChange={handleInputChange}
-                    className={`mt-1 w-full border ${errors.lastName ? "border-red-500" : "border-gray-300"
-                      } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                    className={`w-full border ${errors.lastName ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] py-3 px-4 text-[#222222]`}
                   />
                   {errors.lastName && (
                     <p className="text-red-500 text-xs mt-1 ml-2">{errors.lastName}</p>
@@ -427,10 +424,9 @@ const Booking = () => {
                 </div>
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col gap-[7px]">
                 <label
-                  className="block text-sm font-medium"
-                  style={{ color: "#374151" }}
+                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                 >
                   Email
                 </label>
@@ -439,38 +435,40 @@ const Booking = () => {
                   name="email"
                   value={email}
                   onChange={handleInputChange}
-                  className={`mt-1 w-full border ${errors.email ? "border-red-500" : "border-gray-300"
-                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                  className={`w-full border ${errors.email ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] py-3 px-4 text-[#222222]`}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.email}</p>
                 )}
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col gap-[7px]">
                 <label
-                  className="block text-sm font-medium "
-                  style={{ color: "#374151" }}
+                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                 >
                   Mobile Number
                 </label>
-                <input
-                  type="number"
-                  name="mobile"
-                  value={mobile}
-                  onChange={handleInputChange}
-                  className={`mt-1 w-full border ${errors.mobile ? "border-red-500" : "border-gray-300"
-                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
-                />
+                <div className={`flex w-full border ${errors.mobile ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] overflow-hidden`}>
+                  <div className="flex items-center justify-center px-4 py-3 border-r border-[#EBEBEB] bg-[#FEFAFA]">
+                    <span className="text-[16px] leading-[1.625em] text-[#222222]">+880</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="mobile"
+                    placeholder="1XXXXXXXXX"
+                    value={mobile}
+                    onChange={handleInputChange}
+                    className="w-full py-3 px-3 text-[16px] leading-[1.625em] text-[#222222] focus:outline-none"
+                  />
+                </div>
                 {errors.mobile && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.mobile}</p>
                 )}
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col gap-[7px]">
                 <label
-                  className="block text-sm font-medium "
-                  style={{ color: "#374151" }}
+                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                 >
                   Last Academic Qualification
                 </label>
@@ -479,18 +477,16 @@ const Booking = () => {
                   name="qualification"
                   value={qualification}
                   onChange={handleInputChange}
-                  className={`mt-1 w-full border ${errors.qualification ? "border-red-500" : "border-gray-300"
-                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                  className={`w-full border ${errors.qualification ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] py-3 px-4 text-[#222222]`}
                 />
                 {errors.qualification && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.qualification}</p>
                 )}
               </div>
 
-              <div className="mb-6">
+              <div className="flex flex-col gap-[7px]">
                 <label
-                  className="block text-sm font-medium "
-                  style={{ color: "#374151" }}
+                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
                 >
                   Passing Institution
                 </label>
@@ -499,22 +495,18 @@ const Booking = () => {
                   name="institution"
                   value={institution}
                   onChange={handleInputChange}
-                  className={`mt-1 w-full border ${errors.institution ? "border-red-500" : "border-gray-300"
-                    } rounded-full py-2 focus:outline-none focus:border-gray-500 px-4 text-gray-600`}
+                  className={`w-full border ${errors.institution ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] py-3 px-4 text-[#222222]`}
                 />
                 {errors.institution && (
                   <p className="text-red-500 text-xs mt-1 ml-2">{errors.institution}</p>
                 )}
               </div>
 
-              <div className="">
+              <div>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  style={{
-                    background: "linear-gradient(to right, #f465a8, #11a5f9)",
-                  }}
-                  className={`w-full text-white py-2 px-4 rounded-full flex justify-center items-center transition-transform ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                  className={`w-full text-white py-3 px-4 rounded-[36px] flex justify-center items-center bg-gradient-to-r from-[#E868AC] to-[#02A9FE] font-bold text-[14px] leading-[1.21em] ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {isLoading ? (
                     <>
@@ -530,16 +522,34 @@ const Booking = () => {
                 </button>
               </div>
             </form>
-          </div >
-        </div >
-        
-        {/* Desktop-only image on right side */}
-        <div className="w-full lg:w-1/2 hidden lg:block">
-          <img src="/Booking.png" className="w-full h-full object-cover" alt="booking image" />
+          </div>
         </div>
-      </div >
+
+        {/* Desktop image on right side - Full height */}
+        <div className="hidden md:block md:w-1/2 relative overflow-hidden rounded-r-[20px]">
+          <div className="absolute inset-0">
+            <Image
+              src="/Westin_Hotel.png"
+              alt="Westin Hotel"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 opacity-30 bg-black bg-opacity-27"></div>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/Westin_Logo.png"
+              alt="Westin Logo"
+              width={332}
+              height={80}
+              priority
+            />
+          </div>
+        </div>
+      </div>
       <ResponseModal />
-    </div >
+    </div>
   );
 };
 

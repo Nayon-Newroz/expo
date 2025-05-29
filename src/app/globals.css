@@ -38,3 +38,14 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.last-row {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* @media (max-width: 640px) {
+  .last-row {
+    margin-left: unset;
+    margin-right: unset;
+  }
+} */

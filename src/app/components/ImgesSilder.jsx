@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -55,10 +56,12 @@ const ImageSlider = ({ images }) => {
   return (
     <Slider {...settings}>
       {[1, 2, 3, 4, 5]?.map((item, i) => (
-        <img
+        <Image
           src={`/past-expo-photos/${i + 1}.jpg`}
-          alt={`past expo photos`}
-          className="w-full h-full bg-blue-700 object-cover block"
+          alt="Why Attend Expo"
+          width={563.58}
+          height={523}
+          className="w-full h-full"
         />
       ))}
     </Slider>

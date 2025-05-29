@@ -7,7 +7,7 @@ import WhyAttend from "./components/WhyAttend";
 
 export default function Home() {
   return (
-    <main className="mx-auto">
+    <main className="mx-auto overflow-x-hidden">
       <section id="hero">
         <HeroSection />
         <BenefitsSection/>
@@ -17,7 +17,7 @@ export default function Home() {
       </section>
       <section
         id="why-attend"
-        style={{ background: "linear-gradient(to right, #f465a8, #11a5f9)" }}
+        
       >
         <WhyAttend />
       </section>

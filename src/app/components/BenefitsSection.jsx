@@ -20,30 +20,37 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section className="relative w-full bg-gradient-to-r from-[#f465a8] to-[#11a5f9] -mt-[20px] sm:-mt-[25px] md:-mt-[90px] lg:-mt-[90px]" >
-      <div className="container mx-auto relative z-10 px-4 pt-[40px] md:pt-[80px]">
+    <section className="relative w-full">
+      {/* Gradient background as in Figma */}
+      <div className="absolute inset-0 w-full h-[784px] md:h-[314px]" style={{ background: "linear-gradient(90deg, #EC4899 50%, #3B82F6 50%)" }} />
+      <div className="absolute inset-0 w-full h-[784px] md:h-[314px] max-w-[1240px] mx-auto" style={{ background: 'linear-gradient(90deg, #EC4899 11.3%, #3B82F6 94.8%' }} />
+
+      <div className="container mx-auto max-w-[900px] relative z-10 px-4 pt-[90px] pb-[30px] ">
         {/* Heading */}
-        <h2 className="text-white text-2xl md:text-[36px] font-semibold leading-[1.21em] text-center relative top-[30px] md:top-[20px]">
+        <h2 className="text-white text-[36px] font-bold leading-[1.21em] text-center ">
           Expo Highlights
         </h2>
 
         {/* Benefits Cards */}
-        <div className="flex flex-wrap gap-4 justify-center relative top-[46px] md:top-[54px]">
+        <div className="flex flex-col md:flex-row flex-wrap gap-3.5 justify-center pt-6 items-center">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="w-full sm:w-[calc(50%-8px)] md:w-[280px] rounded-[20px] bg-white shadow-lg justify-center flex flex-col items-center p-4 md:p-6"
+              className="w-full max-w-[420px] md:w-[280px] h-full rounded-[20px] bg-white shadow-[0px_4px_30px_rgba(0,0,0,0.1)] flex flex-col items-center py-[38px]"
             >
-              <div className="flex items-center justify-center h-[50px] md:h-[60px] w-full relative">
+              <div className="flex items-center justify-center h-[51px] w-auto">
                 <Image
                   src={benefit.icon}
                   alt={benefit.title}
-                  fill
-                  className="object-contain h-[50px] md:h-[60px] w-full"
+                  width={benefit.icon.includes('free_entry') ? 42 : benefit.icon.includes('scholarship') ? 65 : 36}
+                  height={51}
+                  className="object-contain"
                 />
               </div>
-              <h3 className="text-xl md:text-[24px] font-semibold leading-[1.21em] text-center mt-3 mb-2.5">{benefit.title}</h3>
-              <p className="whitespace-pre-line text-sm md:text-base font-normal leading-[1.21em] text-center m-0">{benefit.description}</p>
+              <div className="mt-3 flex flex-col items-center gap-[10px]">
+                <h3 className="text-[24px] font-bold leading-[1.21em] text-center text-black">{benefit.title}</h3>
+                <p className="whitespace-pre-line text-[16px] font-normal leading-[1.21em] text-center text-black">{benefit.description}</p>
+              </div>
             </div>
           ))}
         </div>
