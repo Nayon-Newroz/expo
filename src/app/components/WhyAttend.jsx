@@ -7,7 +7,7 @@ const WhyAttend = () => {
         <div className="px-4 lg:px-0">
           <h1 className="text-4xl md:text-5xl font-bold mb-5 text-white">
             Why <br />
-            Attend
+            Attend?
           </h1>
           <ul className="text-white list-disc pl-4 text-[14px] space-y-1 md:space-y-1">
             <li>Free Entry - No entry fee</li>
