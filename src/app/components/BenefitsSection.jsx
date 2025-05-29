@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const BenefitsSection = () => {
   const benefits = [
@@ -39,7 +39,7 @@ const BenefitsSection = () => {
                   src={benefit.icon}
                   alt={benefit.title}
                   fill
-                  className="object-contain"
+                  className="object-contain h-[50px] md:h-[60px] w-full"
                 />
               </div>
               <h3 className="text-xl md:text-[24px] font-semibold leading-[1.21em] text-center mt-3 mb-2.5">{benefit.title}</h3>
