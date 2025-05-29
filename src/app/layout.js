@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Australian Education EXPO 2025",
+  title: "Australian Education Expo by Executive Study Abroad",
   description: "Join the premier Australian Education EXPO 2025 – your gateway to top universities, colleges, and institutions in Australia. Meet representatives, explore courses, scholarships, and get expert advice on studying in Australia. Register now for the largest education fair of the year!",
 };
 
