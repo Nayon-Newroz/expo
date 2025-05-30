@@ -7,7 +7,7 @@ const WhyAttend = () => {
       <div className='flex flex-col w-full max-w-[1240px] mx-auto' style={{ background: 'linear-gradient(82deg, #EC4899 11.3%, #3B82F6 94.8%)' }} >
         <div className="flex flex-col w-full max-w-[900px] mx-auto">
           <div className="flex flex-col-reverse md:flex-row">
-            <div className="w-full px-5 md:px-4 lg:px-0 md:w-1/2 flex flex-col justify-center">
+            <div className="w-full px-5 md:px-4 py-8 md:py-8 lg:px-0 md:w-1/2 flex flex-col justify-center">
               <div>
                 <h1 className="text-[50px] md:max-w-[300px] font-bold leading-[1.21em] text-white mb-[20px]">
                   Why Attend?
@@ -24,10 +24,8 @@ const WhyAttend = () => {
                 </ul>
               </div>
             </div>
-            <div className="w-full md:w-1/2">
-              <div className="relative w-full h-full">
-                <ImageSlider />
-              </div>
+            <div className="w-full md:w-1/2 md:flex-1 md:my-auto">
+              <ImageSlider />
             </div>
           </div>
         </div >
