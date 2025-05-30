@@ -41,19 +41,21 @@ const Participates = () => {
 
   return (
     <div className="py-[50px] pb-[100px] w-full max-w-[900px] mx-auto px-4 md:px-0">
-      <h1 className="text-center text-[36px] font-bold leading-[1.21em] pb-[5px]">
+      <h1 className="text-center text-[32px] sm:text-[36px] font-bold leading-[1.21em] pb-[5px]">
         Participating Australian Universities
       </h1>
 
-      <div className="flex flex-wrap justify-between items-center max-w-[434px] sm:max-w-[900px] mx-auto gap-[16px] pt-6 md:pt-[24px]">
+      <div className="grid grid-cols-3 gap-10 place-items-center mx-auto sm:flex sm:flex-wrap sm:justify-between sm:items-center max-w-[434px] sm:max-w-[900px] sm:gap-[16px] pt-6 md:pt-[24px]">
         {logos.map((logo, index) => (
           <div
             key={logo.id}
             className={`flex items-center justify-center ${index >= logos.length - 5 ? "last-row" : ""
               }`}
             style={{
-              width: logo.width,
-              height: logo.height,
+              width: "auto",
+              height: "auto",
+              maxWidth: logo.width,
+              maxHeight: logo.height,
             }}
           >
             <Image
