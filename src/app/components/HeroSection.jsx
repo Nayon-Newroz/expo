@@ -42,14 +42,14 @@ const HeroSection = () => {
               alt="Sydney Opera House"
               width={752}
               height={298}
-              className="w-[454px] md:w-[752px] h-[180px] md:h-[298px] object-cover md:object-cover mx-auto"
+              className="w-full h-[160px] sm:w-[454px] md:w-[752px] sm:h-[180px] md:h-[298px] object-cover md:object-cover mx-auto"
               priority
             />
           </div>
           {/* Date Banner - positioned according to Figma design */}
-          <div className="absolute w-full -bottom-14 md:-bottom-[44px] z-10 flex justify-center">
-            <div className="w-[412px] md:w-full max-w-[890px] flex justify-center items-center bg-white rounded-[20px] py-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
-              <h2 className="text-[32px] max-w-[402px] md:max-w-full font-bold leading-[1.21em] text-center text-black px-4">
+          <div className="absolute w-full -bottom-10 sm:-bottom-14 md:-bottom-[44px] z-10 flex justify-center">
+            <div className="w-[412px] md:w-full max-w-[890px] flex justify-center items-center bg-white rounded-[20px] py-4 sm:py-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
+              <h2 className="text-[24px] sm:text-[32px] max-w-[402px] md:max-w-full font-bold leading-[1.21em] text-center text-black px-4">
                 Friday, 27<sup>th</sup> June 2025 (10am-5.30pm)
               </h2>
             </div>

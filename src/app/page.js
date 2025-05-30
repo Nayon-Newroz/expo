@@ -7,7 +7,7 @@ import WhyAttend from "./components/WhyAttend";
 
 export default function Home() {
   return (
-    <main className="mx-auto overflow-x-hidden">
+    <main className="mx-auto">
       <section id="hero">
         <HeroSection />
         <BenefitsSection/>
