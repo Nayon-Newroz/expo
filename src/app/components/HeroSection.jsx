@@ -16,7 +16,7 @@ const HeroSection = () => {
               alt="Executive Study Abroad Logo"
               width={399}
               height={126}
-              className="w-[340px] sm:max-w-[340px] md:w-full md:max-w-[399px] h-auto"
+              className="w-[340px] sm:w-[340px] md:w-[399px] h-auto"
               priority
             />
           </div>
@@ -28,7 +28,7 @@ const HeroSection = () => {
               alt="EXPO Logo"
               width={443}
               height={208}
-              className="w-[340px] sm:max-w-[340px] md:w-full md:max-w-[443px] h-auto object-contain"
+              className="w-[340px] sm:w-[340px] md:w-[443px] h-auto object-contain"
               priority
             />
           </div>
@@ -42,7 +42,7 @@ const HeroSection = () => {
               alt="Sydney Opera House"
               width={752}
               height={298}
-              className="w-full h-[160px] sm:w-[454px] md:w-[752px] sm:h-[180px] md:h-[298px] object-cover md:object-cover mx-auto"
+              className="w-full h-fit sm:w-[454px] md:w-[752px] sm:h-[180px] md:h-[298px] object-cover md:object-cover mx-auto"
               priority
             />
           </div>
