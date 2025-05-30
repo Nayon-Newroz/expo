@@ -41,7 +41,7 @@ const Participates = () => {
 
   return (
     <div className="py-[50px] pb-[100px] w-full max-w-[900px] mx-auto px-4 md:px-0">
-      <h1 className="text-center text-[32px] sm:text-[36px] font-bold leading-[1.21em] pb-[5px]">
+      <h1 className="text-center text-[30px] sm:text-[36px] font-bold leading-[1.21em] pb-[5px]">
         Participating Australian Universities
       </h1>
 
