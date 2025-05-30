@@ -60,7 +60,7 @@ const Booking = () => {
   const isValidBDPhone = (phone) => {
     // Remove any non-digit characters
     const digitsOnly = phone.replace(/\D/g, '');
-    
+
     // For our input field, user should enter only the number without country code
     // Since we display +880 prefix separately
     // Bangladesh mobile numbers start with 1 followed by 9 more digits
@@ -95,8 +95,13 @@ const Booking = () => {
       case "mobile":
         if (!value.trim()) {
           error = "Mobile number is required";
-        } else if (!isValidBDPhone(value)) {
-          error = "Please enter a 10-digit Bangladesh mobile number starting with 1";
+        } else if (value[0] !== "1") {
+          error = "Please enter a valid Bangladesh mobile number starting with 1";
+        }
+        else if (!isValidBDPhone(value) && value.length == 10) {
+          error = "Please enter a valid Bangladesh mobile number";
+        } else if (value.length < 10 && value.length > 0) {
+          error = "Please enter a 10-digit mobile number";
         }
         break;
       case "qualification":
@@ -121,7 +126,13 @@ const Booking = () => {
       case "firstName": setFirstName(value); break;
       case "lastName": setLastName(value); break;
       case "email": setEmail(value); break;
-      case "mobile": setMobile(value); break;
+      case "mobile":
+        // Only allow up to 10 digits for mobile number
+        const digitsOnly = value.replace(/\D/g, '');
+        if (digitsOnly.length <= 10) {
+          setMobile(digitsOnly);
+        }
+        break;
       case "qualification": setQualification(value); break;
       case "institution": setInstitution(value); break;
       default: break;
@@ -349,8 +360,8 @@ const Booking = () => {
 
   return (
     <div className="py-[64px] w-full max-w-[900px] mx-auto px-4 lg:px-0">
-      <h1 className="text-[36px] font-bold leading-[1.21em] mb-[24px] text-center md:text-left">
-        Book Your <br />Free Entry Now
+      <h1 className="text-[34px] font-bold leading-[1.21em] mb-[24px] text-center md:text-left">
+        Book Your Free Entry Now
       </h1>
 
       <div className="w-full h-auto rounded-[20px] bg-white overflow-hidden shadow-[0px_4px_53px_rgba(0,0,0,0.1)] md:flex">
@@ -389,7 +400,7 @@ const Booking = () => {
               <div className="flex flex-col sm:flex-row gap-[22px]">
                 <div className="w-full flex flex-col gap-[7px]">
                   <label
-                    className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                    className="text-sm font-medium leading-[1.21em] text-[#374151]"
                   >
                     First Name
                   </label>
@@ -407,7 +418,7 @@ const Booking = () => {
 
                 <div className="w-full flex flex-col gap-[7px]">
                   <label
-                    className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                    className="text-sm font-medium leading-[1.21em] text-[#374151]"
                   >
                     Last Name
                   </label>
@@ -426,7 +437,7 @@ const Booking = () => {
 
               <div className="flex flex-col gap-[7px]">
                 <label
-                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                  className="text-sm font-medium leading-[1.21em] text-[#374151]"
                 >
                   Email
                 </label>
@@ -444,7 +455,7 @@ const Booking = () => {
 
               <div className="flex flex-col gap-[7px]">
                 <label
-                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                  className="text-sm font-medium leading-[1.21em] text-[#374151]"
                 >
                   Mobile Number
                 </label>
@@ -467,7 +478,7 @@ const Booking = () => {
 
               <div className="flex flex-col gap-[7px]">
                 <label
-                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                  className="text-sm font-medium leading-[1.21em] text-[#374151]"
                 >
                   Last Academic Qualification
                 </label>
@@ -485,7 +496,7 @@ const Booking = () => {
 
               <div className="flex flex-col gap-[7px]">
                 <label
-                  className="text-[12px] font-normal leading-[1.21em] text-[#374151]"
+                  className="text-sm font-medium leading-[1.21em] text-[#374151]"
                 >
                   Passing Institution
                 </label>
@@ -505,7 +516,7 @@ const Booking = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className={`w-full text-white py-3 px-4 rounded-[36px] flex justify-center items-center bg-gradient-to-r from-[#E868AC] to-[#02A9FE] font-bold text-[14px] leading-[1.21em] ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className={`w-full text-white py-3 px-4 rounded-[36px] flex justify-center items-center bg-gradient-to-r from-[#EC4899] to-[#3B82F6] font-bold text-[14px] leading-[1.21em] ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   {isLoading ? (
                     <>

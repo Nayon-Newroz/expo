@@ -40,12 +40,12 @@ const Participates = () => {
   ];
 
   return (
-    <div className="py-[50px] pb-[100px] w-full max-w-[900px] mx-auto px-4 md:px-0">
-      <h1 className="text-center text-[30px] sm:text-[36px] font-bold leading-[1.21em] pb-[5px]">
+    <div className="py-[50px] pb-[100px] w-full max-w-[900px] mx-auto px-4 lg:px-0">
+      <h1 className="text-center text-[30px] sm:text-[36px] font-bold leading-[1.21em] pb-5">
         Participating Australian Universities
       </h1>
 
-      <div className="grid grid-cols-3 gap-10 place-items-center mx-auto sm:flex sm:flex-wrap sm:justify-between sm:items-center max-w-[434px] sm:max-w-[900px] sm:gap-[16px] pt-6 md:pt-[24px]">
+      <div className="grid grid-cols-3 gap-10 place-items-center mx-auto sm:flex sm:flex-wrap sm:justify-between sm:items-center max-w-[434px] sm:max-w-[900px] sm:gap-8 pt-6 md:pt-[24px]">
         {logos.map((logo, index) => (
           <div
             key={logo.id}
