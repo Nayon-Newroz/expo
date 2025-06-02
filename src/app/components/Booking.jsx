@@ -459,7 +459,7 @@ const Booking = () => {
                 >
                   Mobile Number
                 </label>
-                <div className={`flex w-full border ${errors.mobile ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] overflow-hidden`}>
+                <div className={`flex w-full border ${errors.mobile ? "border-red-500" : "border-[#EBEBEB]"} rounded-[40px] overflow-hidden focus-within:ring-2 `}>
                   <div className="flex items-center justify-center px-4 py-3 border-r border-[#EBEBEB] bg-[#FEFAFA]">
                     <span className="text-[16px] leading-[1.625em] text-[#222222]">+880</span>
                   </div>
